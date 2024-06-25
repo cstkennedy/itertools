@@ -88,7 +88,7 @@ for (Zipped.Tuple tuple : zip(lhsCollection, rhsCollection)) {
 }
 ```
 
-where `zip` can be utilized as a static import. If the the position supplied to
+where `zip` can be utilized as a static import. If the position supplied to
 `getValueAt` is out of bounds... an
 [`IndexOutOfBoundsException`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IndexOutOfBoundsException.html)
 should be thrown.
