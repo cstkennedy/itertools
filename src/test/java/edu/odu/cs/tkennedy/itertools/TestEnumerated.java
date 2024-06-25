@@ -11,6 +11,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import static edu.odu.cs.tkennedy.itertools.Enumerated.enumerate;
 
 
 /**
@@ -45,33 +49,37 @@ public class TestEnumerated
     @Test
     public void testBasicUse()
     {
-        Enumerated.Pair expected = null;
+        // How do I call Enumerated.enumerate?
+		List<String> someCollection = Arrays.asList(
+			"Hello", "Java", ", ", "Python", "already", "has", "emumerate", "!!!!"
+		);
 
-        // TODO: This needs to be replaced with an iterator
-        Enumerated.Pair actual = null;
+		Iterable<Enumerated.Pair<String>> collection = enumerate(someCollection);
+        Iterator<Enumerated.Pair<String>> it = collection.iterator();
 
+        Enumerated.Pair<String> expected = null;
         expected = new Enumerated.Pair(0, "Hello");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(1, "Java");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(2, ", ");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(3, "Python");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(4, "already");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(5, "has");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(6, "emumerate");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
 
         expected = new Enumerated.Pair(7, "!!!!");
-        assertThat(actual, is(equalTo(expected)));
+        assertThat(it.next(), is(equalTo(expected)));
     }
 }

@@ -17,7 +17,8 @@ public class Enumerated
 
         public Pair(int idx, T val)
         {
-
+            this.index = idx;
+            this.value = val;
         }
 
         /**
@@ -26,11 +27,41 @@ public class Enumerated
          */
         public boolean equals(Object rhs)
         {
-            if (!(rhs instanceof Enumerated)) {
+            if (!(rhs instanceof Enumerated.Pair)) {
                 return false;
             }
 
+            Enumerated.Pair rhsPair = (Enumerated.Pair) rhs;
+
+            return this.index == rhsPair.index
+                && this.value.equals(rhsPair.value);
+        }
+    }
+
+    public class IndexedIterator<T> implements Iterator<Enumerated.Pair<T>>
+    {
+        public IndexedIterator()
+        {
+
+        }
+
+        public boolean hasNext()
+        {
             return false;
+        }
+
+        @Override
+        public Enumerated.Pair<T> next()
+        {
+            return null;
+        }
+    }
+
+    public class IndexedWrapper<T> implements Iterable<Enumerated.Pair<T>>
+    {
+        public Iterator<Enumerated.Pair<T>> iterator()
+        {
+            return new IndexedIterator<T>();
         }
     }
 
