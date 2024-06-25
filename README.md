@@ -84,7 +84,7 @@ The Java form of the loop should take a form similiar to...
 
 ```java
 for (Zipped.Tuple tuple : zip(lhsCollection, rhsCollection)) {
-    System.out.printf("%3d -> %s", tuple.getValueAt(0), tuple.getValueAt(1));
+    System.out.printf("(%s, %s)", tuple.getValueAt(0), tuple.getValueAt(1));
 }
 ```
 
