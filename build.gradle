@@ -33,7 +33,6 @@ dependencies {
 jar {
     archiveBaseName = "IterTools"
 
-    // TODO: Add main driver
     manifest {
         attributes(
             "Main-Class": "edu.odu.cs.tkennedy.DemoIterTools"
