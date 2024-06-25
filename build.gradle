@@ -1,0 +1,79 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+
+    id "jacoco"
+    id "pmd"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Everything in src/main (production code).
+    // implementation ...
+
+    // Everything in src/test (test code)
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+}
+
+jar {
+    archiveBaseName = "IterTools"
+
+    // TODO: Add main driver
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.tkennedy.DemoIterTools"
+        )
+    }
+}
+
+application {
+    mainClass = "edu.odu.cs.tkennedy.DemoIterTools"
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+
+    reports {
+        html.required = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+pmd {
+    toolVersion = "6.21.0"
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+pmdTest {
+    enabled = false
+}
