@@ -1,13 +1,15 @@
 package edu.odu.cs.tkennedy;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.odu.cs.tkennedy.itertools.Enumerated;
 
 import static edu.odu.cs.tkennedy.itertools.Enumerated.enumerate;
 
+@SuppressWarnings(
+    "PMD"
+)
 public class DemoIterTools
 {
     public static void main(String... args)

@@ -6,6 +6,13 @@ import java.util.Iterator;
 /**
  * Wrapper for static<code>enumerate</code> functions that provide indexed iterators.
  */
+@SuppressWarnings({
+    "PMD.ClassNamingConventions",
+    "PMD.ShortVariable",
+    "PMD.ShortClassName",
+    "PMD.BeanMembersShouldSerialize",
+    "PMD.OnlyOneReturn"
+})
 public class Enumerated
 {
     public static class Pair<T>
@@ -13,12 +20,12 @@ public class Enumerated
         public int index;
         public T value;
 
-        public Pair(T val)
+        public Pair(final T val)
         {
             this(0, val);
         }
 
-        public Pair(int idx, T val)
+        public Pair(final int idx, final T val)
         {
             this.index = idx;
             this.value = val;
@@ -29,16 +36,23 @@ public class Enumerated
          * values.
          */
         @Override
-        public boolean equals(Object rhs)
+        public boolean equals(final Object rhs)
         {
             if (!(rhs instanceof Enumerated.Pair)) {
                 return false;
             }
 
-            Enumerated.Pair<T> rhsPair = (Enumerated.Pair<T>) rhs;
+            final Enumerated.Pair<T> rhsPair = (Enumerated.Pair<T>) rhs;
 
             return this.index == rhsPair.index
                 && this.value.equals(rhsPair.value);
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return this.index
+                 + (2 * this.value.hashCode());
         }
     }
 
@@ -70,7 +84,7 @@ public class Enumerated
         /**
          * T.B.W.
          */
-        private IndexedIterator(Iterator<T> it)
+        private IndexedIterator(final Iterator<T> it)
         {
             this(it, 0);
         }
@@ -78,7 +92,7 @@ public class Enumerated
         /**
          * T.B.W.
          */
-        private IndexedIterator(Iterator<T> it, int start)
+        private IndexedIterator(final Iterator<T> it, final int start)
         {
             this.wrappedIt = it;
             this.idx = start;
@@ -116,7 +130,7 @@ public class Enumerated
         /**
          * T.B.W.
          */
-        public IndexedIterable(Iterable<T> collection)
+        public IndexedIterable(final Iterable<T> collection)
         {
             this(collection, 0);
         }
@@ -124,13 +138,13 @@ public class Enumerated
         /**
          * T.B.W.
          */
-        public IndexedIterable(Iterable<T> collection, int start)
+        public IndexedIterable(final Iterable<T> collection, final int start)
         {
             this.theCollection = collection;
             this.start = start;
         }
 
-
+        @Override
         public Iterator<Enumerated.Pair<T>> iterator()
         {
             return new IndexedIterator<T>(this.theCollection.iterator(), this.start);
@@ -143,7 +157,7 @@ public class Enumerated
      *
      * @param theCollection collection of values to index
      */
-    public static <T> Iterable<Enumerated.Pair<T>> enumerate(Iterable<T> theCollection)
+    public static <T> Iterable<Enumerated.Pair<T>> enumerate(final Iterable<T> theCollection)
     {
         return new IndexedIterable<T>(theCollection);
     }
@@ -155,7 +169,7 @@ public class Enumerated
      * @param theCollection collection of values to index
      * @param start starting (first) index
      */
-    public static <T> Iterable<Enumerated.Pair<T>> enumerate(Iterable<T> theCollection, int start)
+    public static <T> Iterable<Enumerated.Pair<T>> enumerate(final Iterable<T> theCollection, final int start)
     {
         return new IndexedIterable<T>(theCollection, start);
     }
