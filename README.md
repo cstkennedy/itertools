@@ -52,7 +52,7 @@ The Java form of the loop should take a form similiar to...
 
 ```java
 for (Enumerated.Pair pair : enumerate(someCollection)) {
-    System.out.printf("%3d -> %s", pair.index, pair.value);
+    System.out.printf("%3d -> %s%n", pair.index, pair.value);
 }
 ```
 
