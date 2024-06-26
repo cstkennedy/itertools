@@ -147,4 +147,16 @@ public class Enumerated
     {
         return new IndexedIterable<T>(theCollection);
     }
+
+    /**
+     * Generated an Iterable sequence of index-value pairs in the form (index,
+     * value).
+     *
+     * @param theCollection collection of values to index
+     * @param start starting (first) index
+     */
+    public static <T> Iterable<Enumerated.Pair<T>> enumerate(Iterable<T> theCollection, int start)
+    {
+        return new IndexedIterable<T>(theCollection, start);
+    }
 }

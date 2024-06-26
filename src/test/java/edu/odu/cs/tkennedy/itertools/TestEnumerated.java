@@ -94,4 +94,53 @@ public class TestEnumerated
 
         assertThat(it.hasNext(), is(not(true)));
     }
+
+    @Test
+    public void testBasicUseWithStart()
+    {
+        // How do I call Enumerated.enumerate?
+		List<String> someCollection = Arrays.asList(
+			"Hello", "Java", ", ", "Python", "already", "has", "emumerate", "!!!!"
+		);
+
+		Iterable<Enumerated.Pair<String>> collection = enumerate(someCollection, 1);
+        Iterator<Enumerated.Pair<String>> it = collection.iterator();
+
+        Enumerated.Pair<String> expected = null;
+        Enumerated.Pair<String> actual = null;
+
+        expected = new Enumerated.Pair(1, "Hello");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(2, "Java");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(3, ", ");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(4, "Python");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(5, "already");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(6, "has");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(7, "emumerate");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        expected = new Enumerated.Pair(8, "!!!!");
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(equalTo(expected)));
+
+        assertThat(it.hasNext(), is(not(true)));
+    }
 }
