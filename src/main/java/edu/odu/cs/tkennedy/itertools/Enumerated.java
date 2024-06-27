@@ -60,7 +60,8 @@ public class Enumerated
      * This is an iterator that consumes an existing iterator (wrapped) to
      * return an index paired with each value returned by the existing wrapped iterator.
      */
-    public static class IndexedIterator<T> implements Iterator<Enumerated.Pair<T>>
+    public static class IndexedIterator<T>
+        implements Iterator<Enumerated.Pair<T>>, Iterable<Enumerated.Pair<T>>
     {
         /**
          * T.B.W.
@@ -84,9 +85,25 @@ public class Enumerated
         /**
          * T.B.W.
          */
+        private IndexedIterator(final Iterable<T> collection)
+        {
+            this(collection.iterator(), 0);
+        }
+
+        /**
+         * T.B.W.
+         */
         private IndexedIterator(final Iterator<T> it)
         {
             this(it, 0);
+        }
+
+        /**
+         * T.B.W.
+         */
+        private IndexedIterator(final Iterable<T> collection, final int start)
+        {
+            this(collection.iterator(), start);
         }
 
         /**
@@ -109,57 +126,23 @@ public class Enumerated
         {
             return new Enumerated.Pair<T>((this.idx)++, this.wrappedIt.next());
         }
-    }
-
-    /**
-     * This is an iterable that wraps an existing iterable. It is assumed that
-     * the original (wrapped) iterable is finite.
-     */
-    public static class IndexedIterable<T> implements Iterable<Enumerated.Pair<T>>
-    {
-        /**
-         * T.B.W.
-         */
-        private int start;
-
-        /**
-         * T.B.W.
-         */
-        private Iterable<T> theCollection;
-
-        /**
-         * T.B.W.
-         */
-        public IndexedIterable(final Iterable<T> collection)
-        {
-            this(collection, 0);
-        }
-
-        /**
-         * T.B.W.
-         */
-        public IndexedIterable(final Iterable<T> collection, final int start)
-        {
-            this.theCollection = collection;
-            this.start = start;
-        }
 
         @Override
         public Iterator<Enumerated.Pair<T>> iterator()
         {
-            return new IndexedIterator<T>(this.theCollection.iterator(), this.start);
+            return this;
         }
     }
 
     /**
-     * Generated an Iterable sequence of index-value pairs in the form (index,
+     * Generate an Iterable sequence of index-value pairs in the form (index,
      * value).
      *
      * @param theCollection collection of values to index
      */
     public static <T> Iterable<Enumerated.Pair<T>> enumerate(final Iterable<T> theCollection)
     {
-        return new IndexedIterable<T>(theCollection);
+        return new IndexedIterator<T>(theCollection);
     }
 
     /**
@@ -171,6 +154,6 @@ public class Enumerated
      */
     public static <T> Iterable<Enumerated.Pair<T>> enumerate(final Iterable<T> theCollection, final int start)
     {
-        return new IndexedIterable<T>(theCollection, start);
+        return new IndexedIterator<T>(theCollection, start);
     }
 }
