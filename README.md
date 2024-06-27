@@ -136,8 +136,6 @@ for (T value : zip(lhsCollection, rhsCollection)) {
 Extend `chain` to work with an arbitrary number of `Iterable`s. 
 
 
-### Intended Java Chain-Loop
-
 # cloned
 
 Implement the Rust [itertools `cloned`
