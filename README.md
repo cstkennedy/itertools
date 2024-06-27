@@ -12,6 +12,16 @@ for cases where...
   3. a range-based (for-each) loop is required (e.g., for readability).
 
 
+# Status
+
+| Operation   | Basic       | Generalized |
+| :----       | :--:        | :--:        |
+| `enumerate` | Implemented |             |
+| `zip`       | Implemented |             |
+| `chain`     |             |             |
+| `cloned`    |             |             |
+
+
 # Goals
 
 ## enumerate
@@ -121,6 +131,43 @@ for (T value : zip(lhsCollection, rhsCollection)) {
 }
 ```
 
+## Generalized chain
+
+Extend `chain` to work with an arbitrary number of `Iterable`s. 
+
+
+### Intended Java Chain-Loop
+
+# cloned
+
+Implement the Rust [itertools `cloned`
+function](https://docs.rs/itertools/latest/itertools/fn.cloned.html) which
+returns deep copies of every item in an`Iterable`.
+
+For example...
+
+```rust
+let mut dupes: Vec<T> = Vec::new();
+
+for dup in cloned(some_collection) {
+    dupes.push(dup);
+}
+```
+
+
+### Intended Java Cloned-Loop
+
+The Java form of the loop should take a form similiar to...
+
+```java
+List<T> dupes = new ArrayList<>();
+
+for (T value : cloned(someCollection)) {
+    dupes.add(dup);
+}
+```
+
+---
 
 # Notes
 
