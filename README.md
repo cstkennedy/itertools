@@ -19,7 +19,7 @@ for cases where...
 | `enumerate` | Implemented |             |
 | `zip`       | Implemented |             |
 | `chain`     |             |             |
-| `cloned`    |             |             |
+| `cloned`    | Implemented |             |
 
 
 # Goals
