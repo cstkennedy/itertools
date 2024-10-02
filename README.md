@@ -117,7 +117,7 @@ traversed as if they are one collection.
 For example...
 
 ```python
-for val chain(collection_1, collection_2):
+for val in chain(collection_1, collection_2):
     print(f"{val}")
 ```
 
@@ -126,7 +126,7 @@ for val chain(collection_1, collection_2):
 The Java form of the loop should take a form similiar to...
 
 ```java
-for (T value : zip(lhsCollection, rhsCollection)) {
+for (T value : chain(lhsCollection, rhsCollection)) {
     System.out.printf("%s%n", value);
 }
 ```
@@ -147,7 +147,7 @@ For example...
 ```rust
 let mut dupes: Vec<T> = Vec::new();
 
-for dup in cloned(some_collection) {
+for dup in some_collection.iter().cloned() {
     dupes.push(dup);
 }
 ```
